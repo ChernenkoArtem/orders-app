@@ -1,0 +1,17 @@
+<div class="container">
+  <app-left-side-bar (filter)="filterFood(food)"></app-left-side-bar>
+
+  <div class="product-list">
+    <ng-container *ngFor="let item of filteredFood">
+      <mat-card class="example-card">
+        <mat-card-title-group>
+          <mat-card-title>{{ item.name }}</mat-card-title>
+          <mat-card-subtitle>{{ item.description  }}</mat-card-subtitle>
+          <mat-card-subtitle>{{ item.ingredients }}</mat-card-subtitle>
+          <img mat-card-xl-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+        </mat-card-title-group>
+      </mat-card>
+    </ng-container>
+  </div>
+</div>
+
