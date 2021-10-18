@@ -1,17 +1,16 @@
 <div class="container">
-  <app-left-side-bar (filter)="filterFood(food)"></app-left-side-bar>
-
+  <app-left-side-bar (filter)="filterFood($event)"></app-left-side-bar>
   <div class="product-list">
     <ng-container *ngFor="let item of filteredFood">
-      <mat-card class="example-card">
+      <mat-card class="example-card" (click)="selectItem(item)">
         <mat-card-title-group>
           <mat-card-title>{{ item.name }}</mat-card-title>
           <mat-card-subtitle>{{ item.description  }}</mat-card-subtitle>
           <mat-card-subtitle>{{ item.ingredients }}</mat-card-subtitle>
-          <img mat-card-xl-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+          <mat-card-title>{{ item.coast + '$'}}</mat-card-title>
+          <img mat-card-xl-image [src]="'./assets/'+ item.type + '.jpeg' " >
         </mat-card-title-group>
       </mat-card>
     </ng-container>
   </div>
 </div>
-

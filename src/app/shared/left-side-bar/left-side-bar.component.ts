@@ -14,7 +14,7 @@ export class LeftSideBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  filterHandler(): void {
-    this.filter.emit();
+  filterHandler(link: string): void {
+    this.filter.emit(link);
   }
 }
