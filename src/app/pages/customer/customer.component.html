@@ -1,0 +1,70 @@
+<div class="customer-page">
+  <div class="items">
+    <div class="bucket__item" *ngFor="let item of itemsInBucket">
+      <mat-card class="example-card">
+        <div class="delete-item" (click)="deleteItem(item.id)">
+          <img class="delete-img" src="assets/delete.png">
+        </div>
+        <mat-card-title-group>
+          <mat-card-title><img mat-card-md-image [src]="'./assets/'+ item.type + '.jpeg' "></mat-card-title>
+
+          <mat-card-title>{{ item.name }}</mat-card-title>
+
+          <mat-card-subtitle>{{ item.description  }}</mat-card-subtitle>
+
+          <mat-card-subtitle>{{ item.ingredients }}</mat-card-subtitle>
+
+          <mat-card-title>{{ item.coast + '$'}}</mat-card-title>
+
+          <mat-card-title *ngIf="item.number > 1">{{ item.number}}Штука</mat-card-title>
+        </mat-card-title-group>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="order-info">
+    <div class="order">Мой заказ:</div>
+
+    <div class="order-coast">Сумма:{{coast$ | async}}$</div>
+  </div>
+
+  <div class="order-form" [formGroup]="orderForm">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+
+      <input type="text" [value]="orderForm.value.email" matInput placeholder="Ex. pat@example.com"
+             [formControlName]="'email'">
+
+      <mat-error *ngIf="orderForm.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Phone number</mat-label>
+
+      <input type="text" matInput placeholder="+38" [formControlName]="'phone'">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Choose pay type</mat-label>
+
+      <mat-select [formControlName]="'payType'">
+        <mat-option value="cash">Cash</mat-option>
+
+        <mat-option value="card">Card</mat-option>
+
+        <mat-option value="googlePay">Google Pay</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>You can attach text</mat-label>
+
+      <textarea matInput [formControlName]="'textArea'"></textarea>
+    </mat-form-field>
+
+    <button mat-button (click)="confirmOrder()">Confirm order</button>
+  </div>
+
+</div>
