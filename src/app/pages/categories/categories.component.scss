@@ -1,5 +1,7 @@
 .container {
   display: flex;
+  padding-left: 100px;
+
   .product-list {
     display: flex;
     flex-direction: column;

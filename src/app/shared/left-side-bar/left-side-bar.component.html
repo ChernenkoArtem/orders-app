@@ -1,7 +1,10 @@
-<mat-selection-list [multiple]="false">
-  <mat-list-option *ngFor="let link of filterLinks" [value]="link" [routerLink]="[link | lowercase]"
-                   [routerLinkActive]="'mat-focus-indicator'"
-                   (click)="filterHandler(link)">
-    {{link}}
-  </mat-list-option>
-</mat-selection-list>
+<div class="side-bar">
+  <mat-selection-list [multiple]="false">
+    <mat-list-option *ngFor="let link of filterLinks" [value]="link" [routerLink]="[link | lowercase]"
+                     [routerLinkActive]="'mat-focus-indicator'"
+                     (click)="filterHandler(link)">
+      {{link}}
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+

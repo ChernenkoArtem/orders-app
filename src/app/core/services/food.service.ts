@@ -1,22 +1,21 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {Food} from '../models/food.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FoodService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  public burgers(): Observable<any> {
+  public getFood(): Observable<[Food]> {
     const options = {
-      headers: {
-        'x-rapidapi-host': 'burgers1.p.rapidapi.com',
-        'x-rapidapi-key': '77cfa518e0msha0364f56a69a699p13f5acjsn7e1097b0222d'
-      }
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
     };
 
-    return this.http.get('https://burgers1.p.rapidapi.com/burgers', options);
+    return this.http.get<[Food]>('http://localhost:3000/api/getFood', options);
   }
 }

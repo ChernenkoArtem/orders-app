@@ -5,6 +5,8 @@ import {selectBurgersList, selectFilteredList} from '../../core/store/reducers/c
 import {currentSelectItem, filterBurgers, getBurgersList, takeCurrentPageName} from '../../core/store/actions/categories.action';
 import {MatDialog} from '@angular/material/dialog';
 import {ModalComponent} from '../../shared/modal/modal.component';
+import {getUserByTokenAction} from '../../core/store/actions/auth.action';
+import {Food} from '../../core/models/food.model';
 
 @Component({
   selector: 'app-categories',
@@ -12,24 +14,26 @@ import {ModalComponent} from '../../shared/modal/modal.component';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  public food: any;
-  public filteredFood: any[];
+  public food: Food[];
+  public filteredFood: Food[];
 
   constructor(
     private router: ActivatedRoute,
     private store: Store<{}>,
     public dialog: MatDialog
   ) {
+    this.store.dispatch(getUserByTokenAction());
     this.store.dispatch(takeCurrentPageName({navTo: this.currentPage(null)}));
     this.store.dispatch(getBurgersList());
   }
 
   ngOnInit(): void {
     this.store.select(selectBurgersList).subscribe(value => {
-        if (value) {
-          this.food = value;
-          this.store.dispatch(filterBurgers());
-        }
+      if (value) {
+        console.log(value);
+        this.food = value;
+        this.store.dispatch(filterBurgers());
+      }
     });
     this.store.select(selectFilteredList).subscribe(value => this.filteredFood = value);
   }

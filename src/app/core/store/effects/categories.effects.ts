@@ -10,11 +10,11 @@ export class CategoriesEffects {
 
   loadBurgersList = createEffect(() => this.actions$.pipe(
       ofType('[Categories page] getBurgersList'),
-      exhaustMap(() => this.foodService.burgers()
+      exhaustMap(() => this.foodService.getFood()
         .pipe(
           map(burgers => {
             return burgers.map((item, index) => {
-              return {...item, type: randomizer(), coast: index * 1.5};
+              return {...item, type: randomizer(), number: 1, coast: index * 1.5};
             });
           }),
           map((val) => SuccessBurgersList({foods: val}))

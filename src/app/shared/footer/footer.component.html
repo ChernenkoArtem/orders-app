@@ -1,4 +1,31 @@
 <footer class="footer">
-  <div class="order">Мой заказ:</div>
-  <div class="order-coast">Сумма:{{coast$ | async}}$</div>
+  <div class="order-info" (click)="toggleBucket()">
+    <div class="order">Мой заказ:</div>
+    <div class="order-coast">Сумма:{{coast$ | async}}$</div>
+  </div>
+
+
+  <div class="bucket" *ngIf="isOpenBucket">
+    <div class="items">
+      <div  class="bucket__item" *ngFor="let item of itemsInBucket">
+        <mat-card class="example-card" >
+          <div class="delete-item" (click)="deleteItem(item.id)">
+            <img class="delete-img" src="assets/delete.png">
+          </div>
+          <mat-card-title-group>
+            <mat-card-title><img mat-card-md-image [src]="'./assets/'+ item.type + '.jpeg' "></mat-card-title>
+            <mat-card-title>{{ item.name }}</mat-card-title>
+            <mat-card-subtitle>{{ item.description  }}</mat-card-subtitle>
+            <mat-card-subtitle>{{ item.ingredients }}</mat-card-subtitle>
+            <mat-card-title>{{ item.coast + '$'}}</mat-card-title>
+            <mat-card-title *ngIf="item.number > 1">{{ item.number}}Штука</mat-card-title>
+          </mat-card-title-group>
+        </mat-card>
+      </div>
+    </div>
+    <div class="controls">
+      <button mat-button (click)="deleteAllItems()" class="controls-btn">Удалить заказ</button>
+      <button mat-button routerLink="/order" class="controls-btn">Оформить Заказ</button>
+    </div>
+  </div>
 </footer>
